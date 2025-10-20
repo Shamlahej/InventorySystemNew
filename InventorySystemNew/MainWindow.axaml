@@ -39,7 +39,7 @@
                                   Height="320"/>
                 </StackPanel>
 
-                <!-- Bottom part: contains the button and total revenue display -->
+                <!-- Bottom part: contains the button.
                 <StackPanel Grid.Row="2" Grid.ColumnSpan="2"
                             Orientation="Horizontal"
                             HorizontalAlignment="Center"
@@ -48,10 +48,10 @@
                         <!-- Button that moves the next order from queued to processed -->
                         <Button Width="160" Click="ProcessNextOrder_OnClick">Process next order</Button>
 
-                        <!-- Label before the revenue amount -->
+                       
                         <TextBlock Text="Total revenue:" VerticalAlignment="Center"/>
 
-                        <!-- Shows the total revenue value from the OrderBook -->
+                        <!-- Shows the total value from the OrderBook -->
                         <TextBlock Text="{Binding OrderBook.TotalRevenue}"
                                    FontWeight="Bold"
                                    VerticalAlignment="Center"/>
