@@ -1,0 +1,61 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="InventorySystemNew.MainWindow"
+        xmlns:local="clr-namespace:InventorySystemNew"
+        x:DataType="local:MainWindow"
+        Title="InventorySystemNew">
+
+        <!-- This connects the XAML file to the C# MainWindow file so the data can be shown -->
+
+        <!-- Creates a grid layout (like a table) where we place everything -->
+        <!-- "Auto" makes the row size fit its content automatically -->
+        <Grid RowDefinitions="Auto,*,Auto" ColumnDefinitions="*,*">
+
+                <!-- The title text shown at the top of the window -->
+                <TextBlock Grid.ColumnSpan="2"
+                           Text="Inventory System"
+                           FontSize="26"
+                           Margin="8"/>
+
+                <!-- Left side: shows queued (waiting) orders -->
+                <StackPanel Grid.Row="1" Grid.Column="0" Margin="8">
+                        <TextBlock Text="Queued orders" FontSize="16"/>
+                        <!-- Connects to the list of queued orders inside the OrderBook -->
+                        <!-- AutoGenerateColumns makes it show all data fields automatically -->
+                        <DataGrid ItemsSource="{Binding OrderBook.QueuedOrders}"
+                                  AutoGenerateColumns="True"
+                                  Height="320"/>
+                </StackPanel>
+
+                <!-- Right side: shows processed orders -->
+                <!-- When an order is processed, it moves from left (queued) to right (processed) -->
+                <StackPanel Grid.Row="1" Grid.Column="1" Margin="8">
+                        <TextBlock Text="Processed orders" FontSize="16"/>
+                        <DataGrid ItemsSource="{Binding OrderBook.ProcessedOrders}"
+                                  AutoGenerateColumns="True"
+                                  Height="320"/>
+                </StackPanel>
+
+                <!-- Bottom part: contains the button and total revenue display -->
+                <StackPanel Grid.Row="2" Grid.ColumnSpan="2"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            Margin="8" Spacing="16">
+
+                        <!-- Button that moves the next order from queued to processed -->
+                        <Button Width="160" Click="ProcessNextOrder_OnClick">Process next order</Button>
+
+                        <!-- Label before the revenue amount -->
+                        <TextBlock Text="Total revenue:" VerticalAlignment="Center"/>
+
+                        <!-- Shows the total revenue value from the OrderBook -->
+                        <TextBlock Text="{Binding OrderBook.TotalRevenue}"
+                                   FontWeight="Bold"
+                                   VerticalAlignment="Center"/>
+                </StackPanel>
+
+        </Grid>
+</Window>
